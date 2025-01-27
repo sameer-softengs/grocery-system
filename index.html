@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grocery Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Grocery Management System</h1>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>Add and Manage Groceries</h2>
+
+      <label for="new-item">Add New Grocery Item</label>
+      <input type="text" id="new-item" placeholder="Enter new item">
+      <button id="add-item">Add Item</button>
+
+      <h3>Available Grocery Items</h3>
+      <ul id="grocery-list" class="checkbox-list">
+        <li><input type="checkbox" value="Sugar"> Sugar</li>
+        <li><input type="checkbox" value="Flour"> Flour</li>
+        <li><input type="checkbox" value="Matchstick"> Matchstick</li>
+        <li><input type="checkbox" value="Tea"> Tea</li>
+        <li><input type="checkbox" value="Daal Masoor"> Daal Masoor</li>
+        <li><input type="checkbox" value="Daal Chana"> Daal Chana</li>
+        <li><input type="checkbox" value="Kala Chana"> Kala Chana</li>
+        <li><input type="checkbox" value="White Channa"> White Channa</li>
+        <li><input type="checkbox" value="Nido"> Nido</li>
+        <li><input type="checkbox" value="Milkpak"> Milkpak</li>
+        <li><input type="checkbox" value="Cooking Oil"> Cooking Oil</li>
+        <li><input type="checkbox" value="Masala"> Masala</li>
+        <li><input type="checkbox" value="Almond"> Almond</li>
+        <li><input type="checkbox" value="Coconut"> Coconut</li>
+        <li><input type="checkbox" value="Kishmish"> Kishmish</li>
+      </ul>
+
+      <button id="add-to-table">Add Selected Items to Table</button>
+
+      <h2>Grocery List Table</h2>
+      <table id="grocery-table">
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Item</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <div class="table-controls">
+        <button id="delete-selected">Erase Selected Items</button>
+        <button id="clear-table">Delete Entire Table</button>
+      </div>
+
+      <h3>Save Table</h3>
+      <label for="save-date">Enter Date:</label>
+      <input type="date" id="save-date">
+      <button id="save-table">Save Table</button>
+
+      <div class="saved-section" id="saved-section">
+        <h3>Saved Tables</h3>
+        <div id="saved-tables"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

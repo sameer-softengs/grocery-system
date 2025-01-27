@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+    color: #333;
+  }
+  
+  header {
+    background-color: #ff5722;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  main {
+    padding: 1rem;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+  }
+  
+  label {
+    display: block;
+    margin: 0.5rem 0 0.2rem;
+  }
+  
+  input, button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #ff5722;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #e64a19;
+  }
+  
+  .checkbox-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff8e1;
+  }
+  
+  .checkbox-list li {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .checkbox-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .checkbox-list input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #ff5722;
+    color: white;
+  }
+  
+  .table-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  
+  .saved-section {
+    margin-top: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff8e1;
+    padding: 1rem;
+  }
+  
+  .saved-section h3 {
+    margin-top: 0;
+  }
+  
+  .edit-saved-table {
+    background-color: #2196f3;
+    margin-top: 0.5rem;
+  }
+  
+  .edit-saved-table:hover {
+    background-color: #1976d2;
+  }
+  
+  @media (max-width: 600px) {
+    input, button {
+      width: 100%;
+    }
+  
+    table th, table td {
+      font-size: 0.9rem;
+    }
+  
+    .table-controls {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+  
