@@ -10,6 +10,11 @@ const saveDateInput = document.getElementById("save-date");
 const savedSection = document.getElementById("saved-section");
 const savedTablesDiv = document.getElementById("saved-tables");
 
+// Load saved data on page load
+window.addEventListener("load", () => {
+  loadSavedData();
+});
+
 // Add new item to the grocery list
 addItemButton.addEventListener("click", () => {
   const newItem = newItemInput.value.trim();
@@ -41,10 +46,16 @@ function addRowToTable(item) {
   groceryTableBody.appendChild(row);
 }
 
-// Erase selected items from the table
+// Erase selected items from the table and the grocery list
 deleteSelectedButton.addEventListener("click", () => {
+  // Remove selected items from the table
   Array.from(groceryTableBody.querySelectorAll("input[type='checkbox']:checked")).forEach((checkbox) => {
     checkbox.closest("tr").remove();
+  });
+
+  // Remove selected items from the grocery list
+  Array.from(groceryList.querySelectorAll("input[type='checkbox']:checked")).forEach((checkbox) => {
+    checkbox.closest("li").remove();
   });
 });
 
@@ -67,10 +78,44 @@ saveTableButton.addEventListener("click", () => {
     return;
   }
 
+  const savedTableData = {
+    date: date,
+    items: rows.map((row) => {
+      const item = row.cells[1].textContent;
+      const quantity = row.cells[2].querySelector("input").value;
+      return { item, quantity };
+    }),
+  };
+
+  // Save the data to LocalStorage
+  saveToLocalStorage(savedTableData);
+
+  // Update the UI
+  renderSavedTable(savedTableData);
+  groceryTableBody.innerHTML = "";
+});
+
+// Save table data to LocalStorage
+function saveToLocalStorage(savedTableData) {
+  const savedTables = JSON.parse(localStorage.getItem("savedTables")) || [];
+  savedTables.push(savedTableData);
+  localStorage.setItem("savedTables", JSON.stringify(savedTables));
+}
+
+// Load saved data from LocalStorage
+function loadSavedData() {
+  const savedTables = JSON.parse(localStorage.getItem("savedTables")) || [];
+  savedTables.forEach((tableData) => {
+    renderSavedTable(tableData);
+  });
+}
+
+// Render a saved table
+function renderSavedTable(tableData) {
   const savedTableDiv = document.createElement("div");
   savedTableDiv.classList.add("saved-table");
   savedTableDiv.innerHTML = `
-    <h4>Saved on: ${date}</h4>
+    <h4>Saved on: ${tableData.date}</h4>
     <table>
       <thead>
         <tr>
@@ -79,11 +124,15 @@ saveTableButton.addEventListener("click", () => {
         </tr>
       </thead>
       <tbody>
-        ${rows.map((row) => {
-          const item = row.cells[1].textContent;
-          const quantity = row.cells[2].querySelector("input").value;
-          return `<tr><td>${item}</td><td>${quantity}</td></tr>`;
-        }).join("")}
+        ${tableData.items
+          .map(
+            (item) =>
+              `<tr>
+                <td>${item.item}</td>
+                <td>${item.quantity}</td>
+              </tr>`
+          )
+          .join("")}
       </tbody>
     </table>
     <button class="delete-saved-table">Delete Table</button>
@@ -93,14 +142,22 @@ saveTableButton.addEventListener("click", () => {
 
   // Add delete functionality to the saved table
   savedTableDiv.querySelector(".delete-saved-table").addEventListener("click", () => {
+    const savedTables = JSON.parse(localStorage.getItem("savedTables")) || [];
+    const updatedTables = savedTables.filter(
+      (table) => table.date !== tableData.date
+    );
+    localStorage.setItem("savedTables", JSON.stringify(updatedTables));
     savedTableDiv.remove();
   });
 
   // Add edit functionality to the saved table
   savedTableDiv.querySelector(".edit-saved-table").addEventListener("click", () => {
-    rows.forEach((row) => groceryTableBody.appendChild(row.cloneNode(true)));
+    tableData.items.forEach((item) => addRowToTable(item.item));
+    const savedTables = JSON.parse(localStorage.getItem("savedTables")) || [];
+    const updatedTables = savedTables.filter(
+      (table) => table.date !== tableData.date
+    );
+    localStorage.setItem("savedTables", JSON.stringify(updatedTables));
     savedTableDiv.remove();
   });
-
-  groceryTableBody.innerHTML = "";
-});
+}
